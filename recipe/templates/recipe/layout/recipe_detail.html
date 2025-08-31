@@ -1,0 +1,18 @@
+{% extends "recipe/layout/base.html" %}
+
+{% block content %}
+<h2>{{ object.title }}</h2>
+
+{% if object.image %}
+  <img src="{{ object.image.url }}" class="img-fluid mb-3">
+{% endif %}
+
+<p><strong>Ingredients:</strong><br>{{ object.ingredients|linebreaks }}</p>
+<p><strong>Steps:</strong><br>{{ object.steps|linebreaks }}</p>
+<p><em>By {{ object.author.username }}</em></p>
+
+{% if user == object.author %}
+  <a href="{% url 'recipe_edit' object.pk %}" class="btn btn-warning">Edit</a>
+  <a href="{% url 'recipe_delete' object.pk %}" class="btn btn-danger">Delete</a>
+{% endif %}
+{% endblock %}
